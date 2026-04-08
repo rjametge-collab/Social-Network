@@ -1,2 +1,2 @@
 # Social-Network
-Assignment 3 for UBC
+Social Network with entering members
