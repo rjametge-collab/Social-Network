@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Social Graph</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Social Network Engine</h1>
+        
+        <div class="grid">
+            <section class="card">
+                <h3>Add User</h3>
+                <input type="text" id="username" placeholder="Username">
+                <button onclick="handleAddUser()">Add User</button>
+                <div id="userList" class="display-box"></div>
+            </section>
+
+            <section class="card">
+                <h3>Add Friendship</h3>
+                <input type="text" id="u1" placeholder="User 1">
+                <input type="text" id="u2" placeholder="User 2">
+                <button onclick="handleAddFriend()">Connect</button>
+                <button onclick="handleSuggestions()">Get Suggestions</button>
+                <div id="graphDisplay" class="display-box"></div>
+            </section>
+
+            <section class="card">
+                <h3>Messaging</h3>
+                <input type="text" id="msgContent" placeholder="Message...">
+                <button onclick="handleSendMessage()">Send</button>
+                <button class="undo-btn" onclick="handleUndo()">Undo Last</button>
+                <div id="messageLog" class="display-box"></div>
+            </section>
+        </div>
+
+        <section class="card full-width">
+            <h3>Shortest Path (BFS)</h3>
+            <input type="text" id="startPath" placeholder="From">
+            <input type="text" id="endPath" placeholder="To">
+            <button onclick="handleBFS()">Find Connection</button>
+            <p id="pathResult"></p>
+        </section>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
