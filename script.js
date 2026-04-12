@@ -61,23 +61,48 @@ class SocialNetwork {
         });
         return [...suggestions.entries()].sort((a, b) => b[1] - a[1]);
     }
+
+    getAllFriendships() {
+        const friendships = [];
+        for (let [user, friends] of this.graph) {
+            friends.forEach(friend => {
+                if (user < friend) { // Avoid duplicates by comparing strings
+                    friendships.push(`${user} ↔ ${friend}`);
+                }
+            });
+        }
+        return friendships;
+    }
 }
 
 // --- UI CONTROLLER ---
 const network = new SocialNetwork();
 
 function handleAddUser() {
-    const name = document.getElementById('username').value;
+    const name = document.getElementById('username').value.trim();
+    if (!name) {
+        updateDisplay('userList', 'Please enter a username to add.');
+        return;
+    }
     if (network.addUser(name)) {
         updateDisplay('userList', Array.from(network.users.keys()).join(', '));
+    } else {
+        updateDisplay('userList', `User ${name} already exists.`);
     }
 }
 
 function handleAddFriend() {
-    const u1 = document.getElementById('u1').value;
-    const u2 = document.getElementById('u2').value;
+    const u1 = document.getElementById('u1').value.trim();
+    const u2 = document.getElementById('u2').value.trim();
+    if (!u1 || !u2) {
+        updateDisplay('graphDisplay', 'Enter both usernames to connect them.');
+        return;
+    }
     if (network.addFriend(u1, u2)) {
         updateDisplay('graphDisplay', `Connected ${u1} & ${u2}`);
+        updateFriendshipsDisplay();
+    } else {
+        updateDisplay('graphDisplay', `Friendship failed. Make sure both ${u1} and ${u2} are added as users first.`);
     }
 }
 
@@ -110,4 +135,12 @@ function handleSuggestions() {
 
 function updateDisplay(id, html) {
     document.getElementById(id).innerHTML = html;
+}
+
+function updateFriendshipsDisplay() {
+    const friendships = network.getAllFriendships();
+    const friendshipsHtml = friendships.length > 0 
+        ? friendships.join('<br>')
+        : 'No friendships yet.';
+    updateDisplay('friendshipsList', friendshipsHtml);
 }
