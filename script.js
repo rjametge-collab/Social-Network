@@ -1,9 +1,9 @@
 class SocialNetwork {
     constructor() {
         this.users = new Map(); // Hash Table for Lookup
-        this.graph = new Map(); // Adjacency List for Graph
-        this.undoStack = [];    // LIFO for Undo
-        this.messageQueue = []; // FIFO for Processing
+        this.graph = new Map(); 
+        this.undoStack = [];    
+        this.messageQueue = []; 
     }
 
     addUser(username) {
@@ -24,7 +24,7 @@ class SocialNetwork {
         return false;
     }
 
-    // BFS to find the shortest path between two users
+    
     findShortestPath(start, end) {
         if (!this.graph.has(start) || !this.graph.has(end)) return null;
         
@@ -75,7 +75,7 @@ class SocialNetwork {
     }
 }
 
-// --- UI CONTROLLER ---
+// UI CONTROLLER 
 const network = new SocialNetwork();
 
 function handleAddUser() {

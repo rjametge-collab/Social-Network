@@ -3,11 +3,10 @@ import dotenv from 'dotenv';
 import connectDB from './db.js';
 import User from './models/User.js';
 
-// 1. Load environment variables
 dotenv.config();
 
-// 2. Connect to the Database
-connectDB();
+
+connectDB(); //Connect to database
 
 const app = express();
 app.use(express.json());
@@ -33,5 +32,5 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
